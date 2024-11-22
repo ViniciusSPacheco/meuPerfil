@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pr-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Perfil Interativo</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-ligh">
+
+    <div class="container mt-5">
+
+        <div class="card" id="profileCard">
+
+            <div class="card-body text-center">
+
+                <img src="https://via.placeholder.com/150" alt="Imagem de Perfil" id="profileImage" class="rounded-circle mb-3" style="width: 150px;" onclick="mudarImagem()">
+
+                <h3 id="profileName">Nome: Vinicius Santos Pacheco</h3>
+
+                <p id="profileAge">Idade: 17</p>
+
+                <h5>Hobbies:</h5>
+
+                <ul id="hobbiesList" class="list-group mb-3">
+
+                    <li class="list-group-item" onclick="removerHobby(this)">Academia</li>
+
+                    <li class="list-group-item" onclick="removerHobby(this)">Esportes</li>
+
+                    <li class="list-group-item" onclick="removerHobby(this)">Música</li>
+
+                </ul>
+
+                <button class="btn btn-primary me-2" onclick="alterarNome()">Alterar Nome</button>
+
+                <button class="btn btn-success me-2" onclick="adicionarHobby()">Adicionar Hobby</button>
+
+                <button class="btn btn-warning me-2" onclick="mudarCorDeFundo()">Mudar Cor de Fundo</button>
+
+                <button class="btn btn-danger me-2" onclick="mudarIdade()">Alterar Idade</button>
+
+                <button class="btn btn-outline-dark me-2" onclick="ativarModoNoturno()">Modo Noturno</button>
+            </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function alterarNome() {
+            const nome = prompt("Digite o novo nome:");
+            if (nome) {
+                document.getElementById("profileName").textContent = "Nome: " + nome;
+            }
+        }
+
+        function adicionarHobby() {
+            const hobby = prompt("Digite um novo hobby:");
+            if (hobby) {
+                const li = document.createElement("li");
+                li.textContent = hobby;
+                li.className = "list-group-item";
+                li.onclick = function() { removerHobby(li); };
+                document.getElementById("hobbiesList").appendChild(li);
+            }
+        }
+
+        function removerHobby(element) {
+            element.style.display = "none"; // Faz o hobby desaparecer ao clicar
+        }
+
+        function mudarCorDeFundo() {
+            const cores = ["#FFA07A", "#836FFF", "#dff0d8", "#90EE90", "#cce5ff"];
+            const corAleatoria = cores[Math.floor(Math.random() * cores.length)];
+            document.body.style.backgroundColor = corAleatoria;
+        }
+
+        function mudarImagem(){
+            const ima = document.getElementById("profileImage")
+            const imaResul = ["https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/5f4bd7a6-f763-4518-9b81-bdfd40ce3fc9/d26yf2h-e858f532-4b44-4584-a255-fdedf789cb0b.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzVmNGJkN2E2LWY3NjMtNDUxOC05YjgxLWJkZmQ0MGNlM2ZjOVwvZDI2eWYyaC1lODU4ZjUzMi00YjQ0LTQ1ODQtYTI1NS1mZGVkZjc4OWNiMGIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ZzXpoMDLZrRAgEjqk0TVOV8RMiA_MBx5xhq99fdUZUg", "https://artpoin.com/wp-content/uploads/2023/02/homem-aranha-fundo-transparente1-150x150.png", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoBWmgXL3LHs2TjjTuiRSqspIH-kOv4N9IPw&s"]
+            const imaAlea = imaResul[Math.floor(Math.random() * imaResul.length)]
+            ima.src = imaAlea
+        }
+
+        function mudarIdade(){
+            const idade = prompt("Digite uma nova idade: ")
+            if (idade){
+                document.getElementById("profileAge").textContent = "Idade: " + idade;
+            }
+        }
+
+         function ativarModoNoturno() {
+            const body = document.body;
+            const card = document.getElementById("profileCard");
+            const buttons = document.querySelectorAll('button');
+
+            body.classList.toggle("bg-dark");
+            body.classList.toggle("text-light");
+            card.classList.toggle("bg-secondary");
+
+            buttons.forEach(button => {
+                button.classList.toggle("btn-light");
+                button.classList.toggle("btn-dark");
+            });
+        }
+
+
+    </script>
+
+</body>
+
+</html>
