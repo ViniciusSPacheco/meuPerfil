@@ -1,122 +1,126 @@
 <!DOCTYPE html>
-<html lang="pr-br">
+<html lang="pr-br"> <!-- Define o idioma da página como português do Brasil -->
 
 <head>
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres para UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Garante que a página seja responsiva em dispositivos móveis -->
+    <title>Perfil Interativo</title> <!-- Título da página, exibido na aba do navegador -->
 
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Perfil Interativo</title>
-
+    <!-- Inclusão do CSS do Bootstrap para estilização da página -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
 </head>
 
-<body class="bg-ligh">
+<body class="bg-ligh"> <!-- Corpo da página com classe para cor de fundo clara -->
 
+    <!-- Container centralizado para o conteúdo -->
     <div class="container mt-5">
 
+        <!-- Card de perfil -->
         <div class="card" id="profileCard">
 
-            <div class="card-body text-center">
+            <div class="card-body text-center"> <!-- Corpo do card com texto centralizado -->
 
+                <!-- Imagem de perfil, com evento para alterar a imagem ao ser clicada -->
                 <img src="https://via.placeholder.com/150" alt="Imagem de Perfil" id="profileImage" class="rounded-circle mb-3" style="width: 150px;" onclick="mudarImagem()">
 
+                <!-- Nome do usuário, com ID para acesso e modificação -->
                 <h3 id="profileName">Nome: Vinicius Santos Pacheco</h3>
 
+                <!-- Idade do usuário, com ID para acesso e modificação -->
                 <p id="profileAge">Idade: 17</p>
 
                 <h5>Hobbies:</h5>
 
+                <!-- Lista de hobbies com itens que podem ser removidos ao clicar -->
                 <ul id="hobbiesList" class="list-group mb-3">
-
                     <li class="list-group-item" onclick="removerHobby(this)">Academia</li>
-
                     <li class="list-group-item" onclick="removerHobby(this)">Esportes</li>
-
                     <li class="list-group-item" onclick="removerHobby(this)">Música</li>
-
                 </ul>
 
+                <!-- Botões para interações, cada um com um evento onclick chamando uma função -->
                 <button class="btn btn-primary me-2" onclick="alterarNome()">Alterar Nome</button>
-
                 <button class="btn btn-success me-2" onclick="adicionarHobby()">Adicionar Hobby</button>
-
                 <button class="btn btn-warning me-2" onclick="mudarCorDeFundo()">Mudar Cor de Fundo</button>
-
                 <button class="btn btn-danger me-2" onclick="mudarIdade()">Alterar Idade</button>
-
                 <button class="btn btn-outline-dark me-2" onclick="ativarModoNoturno()">Modo Noturno</button>
             </div>
-            </div>
-
         </div>
 
     </div>
 
-    <script>
-
-        function alterarNome() {
-            const nome = prompt("Digite o novo nome:");
-            if (nome) {
-                document.getElementById("profileName").textContent = "Nome: " + nome;
-            }
-        }
-
-        function adicionarHobby() {
-            const hobby = prompt("Digite um novo hobby:");
-            if (hobby) {
-                const li = document.createElement("li");
-                li.textContent = hobby;
-                li.className = "list-group-item";
-                li.onclick = function() { removerHobby(li); };
-                document.getElementById("hobbiesList").appendChild(li);
-            }
-        }
-
-        function removerHobby(element) {
-            element.style.display = "none"; // Faz o hobby desaparecer ao clicar
-        }
-
-        function mudarCorDeFundo() {
-            const cores = ["#FFA07A", "#836FFF", "#dff0d8", "#90EE90", "#cce5ff"];
-            const corAleatoria = cores[Math.floor(Math.random() * cores.length)];
-            document.body.style.backgroundColor = corAleatoria;
-        }
-
-        function mudarImagem(){
-            const ima = document.getElementById("profileImage")
-            const imaResul = ["https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/5f4bd7a6-f763-4518-9b81-bdfd40ce3fc9/d26yf2h-e858f532-4b44-4584-a255-fdedf789cb0b.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzVmNGJkN2E2LWY3NjMtNDUxOC05YjgxLWJkZmQ0MGNlM2ZjOVwvZDI2eWYyaC1lODU4ZjUzMi00YjQ0LTQ1ODQtYTI1NS1mZGVkZjc4OWNiMGIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ZzXpoMDLZrRAgEjqk0TVOV8RMiA_MBx5xhq99fdUZUg", "https://artpoin.com/wp-content/uploads/2023/02/homem-aranha-fundo-transparente1-150x150.png", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoBWmgXL3LHs2TjjTuiRSqspIH-kOv4N9IPw&s"]
-            const imaAlea = imaResul[Math.floor(Math.random() * imaResul.length)]
-            ima.src = imaAlea
-        }
-
-        function mudarIdade(){
-            const idade = prompt("Digite uma nova idade: ")
-            if (idade){
-                document.getElementById("profileAge").textContent = "Idade: " + idade;
-            }
-        }
-
-         function ativarModoNoturno() {
-            const body = document.body;
-            const card = document.getElementById("profileCard");
-            const buttons = document.querySelectorAll('button');
-
-            body.classList.toggle("bg-dark");
-            body.classList.toggle("text-light");
-            card.classList.toggle("bg-secondary");
-
-            buttons.forEach(button => {
-                button.classList.toggle("btn-light");
-                button.classList.toggle("btn-dark");
-            });
-        }
-
-
-    </script>
-
 </body>
+
+<script>
+    // Função para alterar o nome do usuário
+    function alterarNome() {
+        const nome = prompt("Digite o novo nome:"); // Solicita o novo nome
+        if (nome) {
+            document.getElementById("profileName").textContent = "Nome: " + nome; // Atualiza o nome na página
+        }
+    }
+
+    // Função para adicionar um novo hobby à lista
+    function adicionarHobby() {
+        const hobby = prompt("Digite um novo hobby:"); // Solicita o nome do novo hobby
+        if (hobby) {
+            const li = document.createElement("li"); // Cria um novo item de lista
+            li.textContent = hobby; // Define o texto do item como o hobby inserido
+            li.className = "list-group-item"; // Aplica a classe de estilo do Bootstrap
+            li.onclick = function() { removerHobby(li); }; // Adiciona evento de remoção ao clicar no hobby
+            document.getElementById("hobbiesList").appendChild(li); // Adiciona o novo hobby à lista
+        }
+    }
+
+    // Função para remover um hobby ao ser clicado
+    function removerHobby(element) {
+        element.style.display = "none"; // Faz o hobby desaparecer
+    }
+
+    // Função para mudar a cor de fundo da página para uma cor aleatória
+    function mudarCorDeFundo() {
+        const cores = ["#FFA07A", "#836FFF", "#dff0d8", "#90EE90", "#cce5ff"]; // Array com cores disponíveis
+        const corAleatoria = cores[Math.floor(Math.random() * cores.length)]; // Escolhe uma cor aleatória
+        document.body.style.backgroundColor = corAleatoria; // Aplica a cor de fundo
+    }
+
+    // Função para alterar a imagem de perfil de forma aleatória
+    function mudarImagem() {
+        const ima = document.getElementById("profileImage"); // Acessa a imagem de perfil
+        const imaResul = [
+            "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/5f4bd7a6-f763-4518-9b81-bdfd40ce3fc9/d26yf2h-e858f532-4b44-4584-a255-fdedf789cb0b.png",
+            "https://artpoin.com/wp-content/uploads/2023/02/homem-aranha-fundo-transparente1-150x150.png",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoBWmgXL3LHs2TjjTuiRSqspIH-kOv4N9IPw&s"
+        ]; // Array com URLs de imagens disponíveis
+        const imaAlea = imaResul[Math.floor(Math.random() * imaResul.length)]; // Escolhe uma imagem aleatória
+        ima.src = imaAlea; // Atualiza a imagem de perfil
+    }
+
+    // Função para alterar a idade do usuário
+    function mudarIdade() {
+        const idade = prompt("Digite uma nova idade: "); // Solicita a nova idade
+        if (idade) {
+            document.getElementById("profileAge").textContent = "Idade: " + idade; // Atualiza a idade na página
+        }
+    }
+
+    // Função para ativar o modo noturno, alterando o tema da página
+    function ativarModoNoturno() {
+        const body = document.body; // Acessa o corpo da página
+        const card = document.getElementById("profileCard"); // Acessa o card de perfil
+        const buttons = document.querySelectorAll('button'); // Acessa todos os botões
+
+        // Alterna as classes para aplicar o tema escuro
+        body.classList.toggle("bg-dark");
+        body.classList.toggle("text-light");
+        card.classList.toggle("bg-secondary");
+
+        // Altera o estilo dos botões para o modo escuro
+        buttons.forEach(button => {
+            button.classList.toggle("btn-light");
+            button.classList.toggle("btn-dark");
+        });
+    }
+</script>
 
 </html>
